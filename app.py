@@ -19,12 +19,13 @@ def get_application_params():
     "Gender" : "<Male/Female>",
     "Married" : "<Married/Unmarried>",
     "ApplicantIncome" :"<Income amount>",
-    "Credit_History" : "Cleared_Debts",
+    "Credit_History" : "<Unclear Debts/Clear Debts>",
     "LoanAmount" : "<Loan Amount>"
     }
     return parameters
+
 ## defining the endpoint which will make prediction
-@app.route("/prediction",methods=['POST'])
+@app.route("/predict",methods=['POST'])
 def prediction():
     """
         Returns loans application status using ML model
@@ -48,7 +49,7 @@ def prediction():
     ApplicantIncome = loan_req['ApplicantIncome']
     LoanAmount = loan_req['LoanAmount']
 
-    result = clf.predit([[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
+    result = clf.predict([[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
 
     if result==0:
         pred = "Rejected"
