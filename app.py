@@ -22,6 +22,7 @@ def get_application_params():
     "Credit_History" : "Cleared_Debts",
     "LoanAmount" : "<Loan Amount>"
     }
+    return parameters
 ## defining the endpoint which will make prediction
 @app.route("/prediction",methods=['POST'])
 def prediction():
@@ -47,7 +48,7 @@ def prediction():
     ApplicantIncome = loan_req['ApplicantIncome']
     LoanAmount = loan_req['LoanAmount']
 
-    result = clf.predit([[Gender, Married, ApplicantIncome, LoanAmount, CreditHistory]])
+    result = clf.predit([[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
 
     if result==0:
         pred = "Rejected"
